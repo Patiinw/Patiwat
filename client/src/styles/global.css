@@ -1,0 +1,301 @@
+/* =========================
+   1) Design Tokens / Variables
+========================= */
+:root {
+  /* Brand & Text */
+  --brand: #4f46e5;
+  --brand-600: #4f46e5;   /* indigo */
+  --brand-700: #4338ca;
+  --text-strong: #111827;
+  --text-soft: #6b7280;
+
+  /* Surfaces & Shadows */
+  --bg-soft: #f6f7fb;
+  --card-radius: 20px;
+  --shadow-soft: 0 10px 25px rgba(0,0,0,.06);
+
+  /* Layout heights (match your navbar/footer) */
+  --nav-h: 64px;
+  --footer-h: 64px;
+}
+
+/* =========================
+   2) Base
+========================= */
+html, body, #root {
+  height: 100%;
+  background: var(--bg-soft);
+  color: var(--text-strong);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+/* Container breathing */
+.container, .container-fluid {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 { letter-spacing: -0.02em; }
+
+/* Links */
+a { color: var(--brand-600); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Cards */
+.mdb-card, .card, .shadow-4, .shadow {
+  border-radius: var(--card-radius) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Buttons */
+.btn, .mdb-btn { border-radius: 12px !important; font-weight: 600; }
+.btn-primary, .mdb-btn-primary, .btn-brand {
+  background: var(--brand-600) !important;
+  border-color: var(--brand-600) !important;
+}
+.btn-primary:hover, .btn-brand:hover {
+  background: var(--brand-700) !important;
+  border-color: var(--brand-700) !important;
+}
+
+/* Inputs */
+.form-control,
+.md-form .form-control,
+.form-outline .form-control,
+.mdb-input,
+.form-control-lg {
+  font-size: 1rem !important;
+  padding: 14px 14px !important;
+  border-radius: 12px !important;
+}
+.form-label {
+  font-size: 0.95rem !important;
+  color: var(--text-soft) !important;
+  font-weight: 600 !important;
+}
+
+/* Navbar / Footer */
+.app-navbar {
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+}
+.app-navbar .nav-link { color: var(--text-strong); font-weight: 600; }
+.app-navbar .nav-link.active, .app-navbar .nav-link:hover { color: var(--brand-600); }
+
+.main-wrap { padding-top: 20px; }
+
+.app-footer {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  height: var(--footer-h);
+  display: grid;
+  place-items: center;
+}
+
+/* =========================
+   3) Enhanced Sidebar
+========================= */
+.app-sidebar-enhanced {
+  position: sticky;
+  top: var(--nav-h);
+  align-self: start;
+  height: calc(100vh - var(--nav-h) - var(--footer-h));
+  background: #ffffff;
+  border-right: 1px solid #eef0f3;
+  box-shadow: var(--shadow-soft);
+  padding: 14px 12px;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: width 220ms ease, padding 220ms ease;
+  overflow: hidden;
+}
+.app-sidebar-enhanced.is-collapsed { width: 76px; padding: 14px 8px; }
+
+.sb-head { display: flex; align-items: center; justify-content: space-between; }
+.sb-brand { display: flex; align-items: center; font-weight: 800; letter-spacing: -0.02em; }
+.sb-brand .fa-seedling { font-size: 1.1rem; color: var(--brand-600); }
+
+.sb-brand-text { transition: opacity 180ms ease, transform 180ms ease; }
+.app-sidebar-enhanced.is-collapsed .sb-brand-text { opacity: 0; transform: translateX(-8px); pointer-events: none; }
+
+.sb-toggle{
+  border: 0; background: #f3f4f6; color: #374151;
+  width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.sb-toggle:hover { background: #e5e7eb; }
+.app-sidebar-enhanced.is-collapsed .sb-toggle .fa-angles-left { transform: rotate(180deg); }
+
+.sb-section { display: flex; flex-direction: column; gap: 8px; }
+.sb-section-title {
+  font-size: 0.8rem; font-weight: 700; color: var(--text-soft);
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: 4px 8px; transition: opacity 180ms ease;
+}
+.app-sidebar-enhanced.is-collapsed .sb-section-title { opacity: 0; pointer-events: none; }
+
+.sb-list { display: flex; flex-direction: column; gap: 6px; }
+
+.sb-link {
+  position: relative;
+  display: grid; grid-template-columns: 28px 1fr auto;
+  align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 12px;
+  color: var(--text-strong); text-decoration: none; font-weight: 600;
+  transition: background 160ms ease, color 160ms ease, transform 120ms ease;
+}
+.sb-link:hover { background: #f6f7fb; }
+
+.sb-link.active {
+  background: #eef2ff;
+  color: var(--brand-600);
+  outline: 2px solid rgba(79,70,229,.25);
+}
+
+.sb-icon {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 10px; background: #f3f4f6;
+}
+.sb-link.active .sb-icon { background: rgba(79,70,229,.12); }
+
+.sb-active-indicator {
+  width: 4px; height: 18px; background: transparent; border-radius: 8px; justify-self: end;
+  transition: background 160ms ease, height 160ms ease;
+}
+.sb-link.active .sb-active-indicator { background: var(--brand-600); height: 22px; }
+
+.sb-text {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.app-sidebar-enhanced.is-collapsed .sb-text,
+.app-sidebar-enhanced.is-collapsed .sb-ext {
+  opacity: 0; transform: translateX(-6px); pointer-events: none;
+}
+
+.sb-footer { margin-top: auto; padding: 8px; border-top: 1px dashed #e5e7eb; }
+
+@media (max-width: 768px) {
+  .app-sidebar-enhanced {
+    position: fixed; top: var(--nav-h); left: 0;
+    height: calc(100vh - var(--nav-h));
+    z-index: 60; width: 240px;
+  }
+}
+
+/* =========================
+   4) Auth Pages (Login/Register/Profile)
+========================= */
+.auth-center {
+  height: calc(100vh - var(--nav-h) - var(--footer-h));
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: #f7f7fb;
+  overflow: hidden; /* ซ่อน scrollbar ของหน้าทั้งหน้า */
+}
+.auth-card {
+  width: 100%; max-width: 520px; border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08); background: #fff;
+  max-height: 100%; overflow: auto; /* ฟอร์มยาว ค่อยเลื่อนภายในการ์ด */
+}
+.auth-card .mb-4:last-child,
+.auth-card .mb-3:last-child { margin-bottom: 0 !important; }
+
+/* =========================
+   5) Threads (Pantip-like)
+========================= */
+/* ใช้ window scroll: ไม่บังคับสูงเท่า viewport และไม่ซ่อน overflow */
+.thread-page {
+  /* เดิมมี height/overflow/grid — ลบทิ้ง */
+  display: block;
+  padding-top: 8px;        /* ชิดใต้ navbar เล็กน้อย */
+  margin-top: 0;
+}
+
+/* ไม่เลื่อนภายใน div แล้ว ให้เลื่อนทั้งหน้าแทน */
+.thread-scroll {
+  overflow: visible;        /* เดิมเป็น overflow: auto */
+  padding-bottom: 0;
+  -ms-overflow-style: auto; /* คืนค่าเริ่มต้น */
+  scrollbar-width: auto;
+}
+.thread-scroll::-webkit-scrollbar { display: initial; } /* แสดง scrollbar ปกติ */
+
+/* Cards */
+.post-card {
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+.post-card h5 { margin-bottom: 6px; }
+.post-meta { color: var(--text-soft); font-size: .92rem; }
+.post-tags { margin-top: 6px; }
+
+/* Header/Filters กระชับ */
+.thread-header { margin-bottom: 6px; }
+.thread-filters { margin-bottom: 8px; }
+
+
+/* ให้คอนเทนต์หน้า /salad ชิดบนใต้ navbar */
+main.main-pane.no-top-gap { padding-top: 0 !important; }
+main.main-pane.no-top-gap > .container,
+main.main-pane.no-top-gap > .container-fluid {
+  padding-top: 8px !important;
+  margin-top: 0 !important;
+}
+
+/* ลด padding-top เฉพาะหน้า Threads ถ้ายังมี container ซ้อนอยู่ */
+.thread-page .container,
+.thread-page .container-fluid { padding-top: 4px !important; }
+
+.layout-2col { display: flex; min-height: auto; }  /* เพื่อเลื่อนทั้งหน้าได้ลื่น */
+.main-pane { flex: 1; }
+
+.profile-avatar {
+  width: 96px; height: 96px; border-radius: 50%;
+  object-fit: cover; border: 3px solid #eef;
+}
+
+/* Avatar บน Navbar */
+.nav-user { color: var(--text-strong); }
+.nav-user:hover { text-decoration: none; opacity: .9; }
+.nav-avatar{
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eef2ff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* ล็อคขนาดรูปที่แสดงผล */
+.post-body img {
+  max-width: 550px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 12px auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.ql-editor img {
+  max-width: 550px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
